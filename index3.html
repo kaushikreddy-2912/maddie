@@ -1,0 +1,1319 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise For My Love</title>
+
+<style>
+
+/* =================================
+   GENERAL SETTINGS
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(
+        135deg,
+        #FFB6C1,
+        #FCE4EC,
+        #FFC0CB
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    overflow: hidden;
+
+    font-family: Georgia, serif;
+    transition: background 2s ease;
+}
+
+body.night {
+    background: #050314;
+}
+
+/* =================================
+   SLIDE 1
+================================= */
+
+.container {
+    text-align: center;
+    padding: 20px;
+    z-index: 2;
+    animation: fadeIn 2s ease;
+}
+
+h1 {
+    color: #AD456C;
+    font-size: 45px;
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+p {
+    color: #814158;
+    font-size: 30px;
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+.heart-button {
+    background: transparent;
+    border: none;
+    font-size: 100px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    animation: heartbeat 1.2s infinite;
+}
+
+/* =================================
+   HEART ANIMATION
+================================= */
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    25%, 60% {
+        transform: scale(1.2);
+    }
+
+    40%, 80% {
+        transform: scale(1);
+    }
+
+}
+
+/* =================================
+   FLOATING HEARTS
+================================= */
+
+.floating-hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-hearts span {
+    position: absolute;
+    bottom: -50px;
+    color: #E75480;
+    font-size: 30px;
+    animation: floatUp 8s linear forwards;
+}
+
+@keyframes floatUp {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+
+}
+
+/* =================================
+   GENERAL FADE
+================================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =================================
+   SLIDE 2
+================================= */
+
+#surprise {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    z-index: 3;
+    animation: fadeIn 2s ease;
+}
+
+#surprise h1 {
+    font-size: 40px;
+}
+
+/* Second clickable heart */
+
+.second-heart {
+    background: transparent;
+    border: none;
+    font-size: 110px;
+    color: #E75480;
+    margin-top: 30px;
+    cursor: pointer;
+
+    animation: heartbeat 1.2s infinite;
+
+    text-shadow: 0 0 25px rgba(231, 84, 128, 0.5);
+}
+
+.second-heart:hover {
+    filter: brightness(1.15);
+}
+
+/* =================================
+   SLIDE 3 - STAR ANIMATION
+================================= */
+
+#canvas {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: contain;
+    display: none;
+
+    z-index: 0;
+}
+
+/* =================================
+   PROPOSAL CARD
+================================= */
+
+#proposal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: none;
+    opacity: 0;
+
+    transition: opacity 2s ease;
+
+    z-index: 3;
+}
+
+#proposal.show {
+    opacity: 1;
+}
+
+.message {
+    text-align: center;
+    padding: 35px 25px;
+
+    width: min(90%, 600px);
+
+    background: rgba(17, 8, 35, 0.88);
+
+    border: 1px solid rgba(255, 170, 220, 0.5);
+
+    border-radius: 25px;
+
+    box-shadow: 0 0 50px rgba(205, 75, 180, 0.3);
+
+    backdrop-filter: blur(12px);
+
+    transform: scale(.8);
+
+    transition: transform 1.5s ease;
+}
+
+#proposal.show .message {
+    transform: scale(1);
+}
+
+.message h1 {
+    color: #ffc3df;
+
+    font-size: clamp(28px, 5vw, 48px);
+
+    font-style: italic;
+
+    text-shadow: 0 0 20px #ed70c7;
+
+    margin-bottom: 18px;
+}
+
+.message p {
+    color: #ead5ef;
+
+    font-size: 17px;
+
+    margin-bottom: 25px;
+}
+
+.heart {
+    color: #ff8fc8;
+    font-size: 30px;
+    animation: heartbeat 1.5s infinite;
+}
+
+/* =================================
+   YES AND NO BUTTONS
+================================= */
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+#yes {
+    pointer-events: auto;
+
+    border: none;
+
+    padding: 13px 35px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        45deg,
+        #e94d9a,
+        #a74bd5
+    );
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 20px #e94d9a;
+
+    transition: .3s;
+
+    white-space: nowrap;
+}
+
+#yes:hover {
+    transform: scale(1.1);
+}
+
+#no {
+    pointer-events: auto;
+
+    border: none;
+
+    padding: 13px 35px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        45deg,
+        #777,
+        #444
+    );
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+#no:hover {
+    background: #555;
+}
+
+#answer {
+    color: #ffc3df;
+    margin-top: 20px;
+    font-size: 19px;
+    display: none;
+}
+
+/* =================================
+   ERROR MESSAGE
+================================= */
+
+#error {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    color: white;
+
+    z-index: 10;
+
+    background: rgba(0,0,0,.7);
+
+    padding: 10px;
+
+    display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =================================
+     FLOATING HEARTS
+================================= -->
+
+<div class="floating-hearts" id="hearts"></div>
+
+
+<!-- =================================
+     SLIDE 1
+================================= -->
+
+<div class="container" id="mainContent">
+
+    <h1>Hey, Majhya Sundar Mulgi...</h1>
+
+    <p>
+        Kalji karu nakos, just take a deep breath...
+    </p>
+
+    <p>
+        Because someone is trying to make your smile
+        even more beautiful today. ❤️
+    </p>
+
+    <button class="heart-button" id="heartButton">
+        ❤️
+    </button>
+
+    <p>Click the heart</p>
+
+</div>
+
+
+<!-- =================================
+     SLIDE 2
+================================= -->
+
+<div id="surprise">
+
+    <h1>Ek special goshta aahe tujhya sathi! ❤️</h1>
+
+    <p>You make my ordinary days extraordinary.</p>
+
+    <button class="second-heart" id="secondHeart">
+        ❤️
+    </button>
+
+</div>
+
+
+<!-- =================================
+     SLIDE 3
+================================= -->
+
+<canvas id="canvas"></canvas>
+
+
+<!-- =================================
+     FINAL PROPOSAL
+================================= -->
+
+<div id="proposal">
+
+    <div class="message">
+
+        <h1>Will you be my girlfriend?</h1>
+
+        <p>
+            Under this beautiful sky, I have
+            just one question for you...
+        </p>
+
+        <div class="heart">♥</div>
+
+        <div class="button-container">
+
+            <button id="yes">Yes! ❤️</button>
+
+            <button id="no">No 🙈</button>
+
+        </div>
+
+        <div id="answer">
+            You've just made my universe brighter. ♥
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="error"></div>
+
+
+<script>
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const mainContent =
+    document.getElementById("mainContent");
+
+const surprise =
+    document.getElementById("surprise");
+
+const heartButton =
+    document.getElementById("heartButton");
+
+const secondHeart =
+    document.getElementById("secondHeart");
+
+const hearts =
+    document.getElementById("hearts");
+
+const canvas =
+    document.getElementById("canvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+const proposal =
+    document.getElementById("proposal");
+
+const errorBox =
+    document.getElementById("error");
+
+const yesButton =
+    document.getElementById("yes");
+
+const noButton =
+    document.getElementById("no");
+
+
+/* ==========================================
+   IMAGE LOADING
+========================================== */
+
+const background = new Image();
+const finalImage = new Image();
+
+function loadImage(image, src) {
+
+    return new Promise((resolve, reject) => {
+
+        image.onload = () => resolve(image);
+
+        image.onerror = () => {
+
+            reject(
+                new Error(src + " could not be loaded.")
+            );
+
+        };
+
+        image.src = src;
+
+    });
+
+}
+
+
+/* ==========================================
+   CONFIGURATION
+========================================== */
+
+const DRAW_DURATION = 12000;
+const TEXT_DURATION = 6000;
+const PARTICLE_COUNT = 2200;
+const HOLD_DURATION = 1800;
+
+const REGION = {
+
+    left: 0.34,
+    right: 0.69,
+
+    top: 0.35,
+    bottom: 0.88
+
+};
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+let W, H;
+
+let particles = [];
+let textTargets = [];
+let textParticles = [];
+
+let silhouetteCanvas;
+
+let stage = 0;
+
+let startTime = 0;
+let morphTime = 0;
+
+let animationStarted = false;
+
+
+/* ==========================================
+   LOAD AND PREPARE IMAGES
+========================================== */
+
+const imagesPromise = Promise.all([
+
+    loadImage(background, "background.png"),
+
+    loadImage(finalImage, "final.png")
+
+])
+.then(() => {
+
+    W = background.naturalWidth;
+    H = background.naturalHeight;
+
+    canvas.width = W;
+    canvas.height = H;
+
+    createPersonParticles();
+
+    createTextTargets();
+
+})
+.catch(error => {
+
+    errorBox.innerText = error.message;
+    errorBox.style.display = "block";
+
+    console.error(error);
+
+    throw error;
+
+});
+
+
+/* ==========================================
+   SLIDE 1 -> SLIDE 2
+========================================== */
+
+heartButton.addEventListener("click", function() {
+
+    mainContent.style.display = "none";
+
+    surprise.style.display = "block";
+
+});
+
+
+/* ==========================================
+   SLIDE 2 -> SLIDE 3
+========================================== */
+
+secondHeart.addEventListener("click", async function() {
+
+    if (animationStarted) return;
+
+    animationStarted = true;
+
+    secondHeart.disabled = true;
+
+    try {
+
+        await imagesPromise;
+
+    } catch (error) {
+
+        animationStarted = false;
+        secondHeart.disabled = false;
+
+        return;
+
+    }
+
+    surprise.style.display = "none";
+
+    hearts.style.display = "none";
+
+    document.body.classList.add("night");
+
+    canvas.style.display = "block";
+
+    startTime = performance.now();
+
+    stage = 0;
+
+    requestAnimationFrame(animate);
+
+});
+
+
+/* ==========================================
+   FLOATING HEARTS
+========================================== */
+
+function createHeart() {
+
+    if (hearts.style.display === "none") return;
+
+    const heart = document.createElement("span");
+
+    heart.innerHTML = "♥";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (20 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+    hearts.appendChild(heart);
+
+    setTimeout(function() {
+
+        heart.remove();
+
+    }, 10000);
+
+}
+
+setInterval(createHeart, 500);
+
+
+/* ==========================================
+   CREATE PERSON PARTICLES
+========================================== */
+
+function createPersonParticles() {
+
+    const temp = document.createElement("canvas");
+
+    temp.width = W;
+    temp.height = H;
+
+    const tempCtx = temp.getContext("2d", {
+        willReadFrequently: true
+    });
+
+    tempCtx.drawImage(finalImage, 0, 0, W, H);
+
+    const imageData = tempCtx.getImageData(
+        0, 0, W, H
+    );
+
+    const data = imageData.data;
+
+    silhouetteCanvas = document.createElement("canvas");
+
+    silhouetteCanvas.width = W;
+    silhouetteCanvas.height = H;
+
+    const silhouetteCtx =
+        silhouetteCanvas.getContext("2d");
+
+    const solidImage =
+        silhouetteCtx.createImageData(W, H);
+
+    const solidData = solidImage.data;
+
+    let silhouetteTargets = [];
+
+    const left = Math.floor(W * REGION.left);
+    const right = Math.floor(W * REGION.right);
+
+    const top = Math.floor(H * REGION.top);
+    const bottom = Math.floor(H * REGION.bottom);
+
+
+    for (let y = top; y < bottom; y += 2) {
+
+        for (let x = left; x < right; x += 2) {
+
+            const i = (y * W + x) * 4;
+
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            const a = data[i + 3];
+
+            if (
+                a > 100 &&
+                r < 35 &&
+                g < 35 &&
+                b < 40
+            ) {
+
+                silhouetteTargets.push({
+
+                    x: x,
+                    y: y
+
+                });
+
+                for (let dy = 0; dy < 2; dy++) {
+
+                    for (let dx = 0; dx < 2; dx++) {
+
+                        const nx = x + dx;
+                        const ny = y + dy;
+
+                        if (nx >= W || ny >= H) continue;
+
+                        const ni = (ny * W + nx) * 4;
+
+                        solidData[ni] = 0;
+                        solidData[ni + 1] = 0;
+                        solidData[ni + 2] = 0;
+                        solidData[ni + 3] = 255;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    silhouetteCtx.putImageData(solidImage, 0, 0);
+
+    if (silhouetteTargets.length === 0) {
+
+        throw new Error(
+            "No dark silhouette detected. Check final.png and REGION."
+        );
+
+    }
+
+
+    // Shuffle targets.
+
+    for (
+        let i = silhouetteTargets.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [
+            silhouetteTargets[i],
+            silhouetteTargets[j]
+        ] = [
+            silhouetteTargets[j],
+            silhouetteTargets[i]
+        ];
+
+    }
+
+
+    const count = Math.min(
+        PARTICLE_COUNT,
+        silhouetteTargets.length
+    );
+
+    const selectedTargets =
+        silhouetteTargets.slice(0, count);
+
+
+    particles = selectedTargets.map(target => {
+
+        return {
+
+            x: Math.random() * W,
+            y: Math.random() * H,
+
+            targetX: target.x,
+            targetY: target.y,
+
+            delay: Math.random() * 0.65,
+
+            size: Math.random() * 1.3 + 0.7
+
+        };
+
+    });
+
+    console.log(
+        "Silhouette particles:",
+        particles.length
+    );
+
+}
+
+
+/* ==========================================
+   CREATE TEXT TARGETS
+========================================== */
+
+function createTextTargets() {
+
+    const temp = document.createElement("canvas");
+
+    temp.width = W;
+    temp.height = H;
+
+    const tctx = temp.getContext("2d");
+
+    tctx.clearRect(0, 0, W, H);
+
+    tctx.fillStyle = "white";
+
+    tctx.textAlign = "center";
+    tctx.textBaseline = "middle";
+
+    const fontSize = Math.min(W * 0.068, 105);
+
+    tctx.font = `italic bold ${fontSize}px Georgia`;
+
+    tctx.fillText(
+        "Will you be my",
+        W / 2,
+        H * 0.44
+    );
+
+    tctx.fillText(
+        "girlfriend?",
+        W / 2,
+        H * 0.56
+    );
+
+    const data = tctx.getImageData(
+        0, 0, W, H
+    ).data;
+
+    for (let y = 0; y < H; y += 4) {
+
+        for (let x = 0; x < W; x += 4) {
+
+            const i = (y * W + x) * 4;
+
+            if (data[i + 3] > 100) {
+
+                textTargets.push({
+
+                    x: x,
+                    y: y
+
+                });
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* ==========================================
+   EASING
+========================================== */
+
+function ease(t) {
+
+    return t * t * (3 - 2 * t);
+
+}
+
+
+/* ==========================================
+   DRAW PARTICLES
+========================================== */
+
+function drawParticle(x, y, size, alpha, color) {
+
+    ctx.globalAlpha = Math.max(
+        0,
+        Math.min(1, alpha)
+    );
+
+    ctx.fillStyle = color;
+
+    ctx.shadowBlur = 12;
+
+    ctx.shadowColor = color;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        size,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+
+    ctx.globalAlpha = 1;
+
+}
+
+
+/* ==========================================
+   DRAW BACKGROUND
+========================================== */
+
+function drawBackground() {
+
+    ctx.drawImage(
+        background,
+        0,
+        0,
+        W,
+        H
+    );
+
+}
+
+
+/* ==========================================
+   DRAW COUPLE
+========================================== */
+
+function drawPerson(progress) {
+
+    particles.forEach(p => {
+
+        const localProgress = Math.max(
+            0,
+            Math.min(
+                1,
+                (progress - p.delay) / (1 - p.delay)
+            )
+        );
+
+        const eased = ease(localProgress);
+
+        const x =
+            p.x + (p.targetX - p.x) * eased;
+
+        const y =
+            p.y + (p.targetY - p.y) * eased;
+
+        drawParticle(
+            x,
+            y,
+            p.size,
+            localProgress,
+            "#ffd5f1"
+        );
+
+    });
+
+}
+
+
+/* ==========================================
+   START TEXT FORMATION
+========================================== */
+
+function startTextFormation() {
+
+    stage = 2;
+
+    morphTime = performance.now();
+
+    textParticles = textTargets.map(target => {
+
+        const source = particles[
+            Math.floor(Math.random() * particles.length)
+        ];
+
+        return {
+
+            x: source.targetX,
+            y: source.targetY,
+
+            targetX: target.x,
+            targetY: target.y,
+
+            delay: Math.random() * 0.25,
+
+            size: Math.random() * 1.5 + 0.7
+
+        };
+
+    });
+
+}
+
+
+/* ==========================================
+   DRAW TEXT
+========================================== */
+
+function drawText(progress) {
+
+    textParticles.forEach(p => {
+
+        const local = Math.max(
+            0,
+            Math.min(
+                1,
+                (progress - p.delay) / (1 - p.delay)
+            )
+        );
+
+        const t = ease(local);
+
+        const x =
+            p.x + (p.targetX - p.x) * t;
+
+        const y =
+            p.y + (p.targetY - p.y) * t;
+
+        drawParticle(
+            x,
+            y,
+            p.size,
+            local,
+            "#ffb9e5"
+        );
+
+    });
+
+}
+
+
+/* ==========================================
+   MAIN ANIMATION
+========================================== */
+
+function animate(now) {
+
+    ctx.clearRect(0, 0, W, H);
+
+    drawBackground();
+
+    const elapsed = now - startTime;
+
+
+    // STAGE 1: DRAW COUPLE
+
+    if (stage === 0) {
+
+        const progress = Math.min(
+            elapsed / DRAW_DURATION,
+            1
+        );
+
+        drawPerson(progress);
+
+        if (progress >= 1) {
+
+            stage = 1;
+
+            setTimeout(() => {
+
+                if (stage === 1) {
+
+                    startTextFormation();
+
+                }
+
+            }, HOLD_DURATION);
+
+        }
+
+    }
+
+
+    // STAGE 2: SOLID SILHOUETTE
+
+    else if (stage === 1) {
+
+        ctx.drawImage(
+            silhouetteCanvas,
+            0,
+            0
+        );
+
+    }
+
+
+    // STAGE 3: FORM PROPOSAL TEXT
+
+    else if (stage === 2) {
+
+        const progress = Math.min(
+            (now - morphTime) / TEXT_DURATION,
+            1
+        );
+
+        ctx.drawImage(
+            silhouetteCanvas,
+            0,
+            0
+        );
+
+        drawText(progress);
+
+        if (
+            progress >= 1 &&
+            !proposal.classList.contains("show")
+        ) {
+
+            proposal.style.display = "flex";
+
+            requestAnimationFrame(() => {
+
+                proposal.classList.add("show");
+
+            });
+
+        }
+
+    }
+
+    requestAnimationFrame(animate);
+
+}
+
+
+/* ==========================================
+   YES BUTTON
+========================================== */
+
+yesButton.addEventListener("click", function() {
+
+    document.getElementById("answer").style.display = "block";
+
+    // Disable both buttons after Yes.
+
+    yesButton.disabled = true;
+    noButton.style.display = "none";
+
+});
+
+
+/* ==========================================
+   NO BUTTON - RUN AWAY
+========================================== */
+
+function moveNoButton() {
+
+    const margin = 15;
+
+    const buttonWidth = noButton.offsetWidth;
+    const buttonHeight = noButton.offsetHeight;
+
+    const maxX = window.innerWidth - buttonWidth - margin;
+    const maxY = window.innerHeight - buttonHeight - margin;
+
+    const randomX = margin + Math.random() *
+        Math.max(0, maxX - margin);
+
+    const randomY = margin + Math.random() *
+        Math.max(0, maxY - margin);
+
+    // Detach from card and move around screen.
+
+    noButton.style.position = "fixed";
+
+    noButton.style.left = randomX + "px";
+    noButton.style.top = randomY + "px";
+
+    noButton.style.zIndex = "10";
+
+}
+
+
+// Move when mouse approaches.
+
+noButton.addEventListener("pointerenter", moveNoButton);
+
+
+// Move when touched on mobile.
+
+noButton.addEventListener("pointerdown", function(event) {
+
+    if (event.pointerType === "touch") {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+
+});
+
+
+// Prevent clicking.
+
+noButton.addEventListener("click", function(event) {
+
+    event.preventDefault();
+
+    moveNoButton();
+
+});
+
+
+// Move if reached by keyboard focus.
+
+noButton.addEventListener("focus", moveNoButton);
+
+
+// Keep the No button inside the visible screen after resizing.
+
+window.addEventListener("resize", function() {
+
+    if (noButton.style.position === "fixed") {
+
+        const maxX = window.innerWidth - noButton.offsetWidth - 15;
+        const maxY = window.innerHeight - noButton.offsetHeight - 15;
+
+        const currentX = parseFloat(noButton.style.left) || 15;
+        const currentY = parseFloat(noButton.style.top) || 15;
+
+        noButton.style.left =
+            Math.max(15, Math.min(currentX, maxX)) + "px";
+
+        noButton.style.top =
+            Math.max(15, Math.min(currentY, maxY)) + "px";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+
